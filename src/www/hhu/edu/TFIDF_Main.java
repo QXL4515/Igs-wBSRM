@@ -355,10 +355,7 @@ public class TFIDF_Main {
 
 			double plC0 = new TFIDF_ComputePlC0().computePlCX(nC0Xl, nC0);// 经验贝叶斯估计
 			double plC1 = new TFIDF_ComputePlC1().computePlCX(nC1Xl, nC1);// 计算P
-			
-			// outTA.append("plC0" + plC0 + "\r\n");
-			// outTA.append("plC1" + plC1 + "\r\n");
-			
+
 			outTA.append("The output data is right in the path：" + OUT_PATH + "/test_data.txt" + "\r\n");
 
 			nC0 = 0;
@@ -517,10 +514,9 @@ public class TFIDF_Main {
 //								matrix[m][p] = 3.0;
 //								tpData[m][p] = 3.0;
 //							}
-
+//	模拟数据修改
 							TFIDF_UserBean userInformation = userList.get(m);
-							TFIDF_WebServiceBean webServiceInformation = webServiceList
-									.get(p);
+							TFIDF_WebServiceBean webServiceInformation = webServiceList.get(p);
 							HashMap<String, String> ll = new HashMap<String, String>();
 							ll.put(userInformation.getNation(),
 									webServiceInformation.getNation());
@@ -557,7 +553,6 @@ public class TFIDF_Main {
 								}
 								nC1++;
 							}
-							// System.out.println("nCo: "+nC0+" nC1: "+nC1+" n: "+n);
 
 							Wi_C0Current = new TFIDF_UpdateWi_C0().computeWi(
 									ll, ll2Num, ll2C0, ll2C1, PERSET_VALUE,
@@ -668,14 +663,14 @@ public class TFIDF_Main {
 								nC0Xl++;
 								nC1Xl++;
 								c = countQoS * 1.0 / n;
-								if (c >= BETA) { /* 为了把功能分离开吧 */// 达不到QoS值标准的数目占目前总数的比值大于等于我们约定的临界值β，那么显然不落在c1中。
+								if (c >= BETA) { // 达不到QoS值标准的数目占目前总数的比值大于等于我们约定的临界值β，那么显然不落在c1中。
 									nC1Xl--;
 								} else {
 									nC0Xl--;
 								}
 							}
 							c = countQoS * 1.0 / n;
-							if (c >= BETA) { /* 为了把功能分离开吧 */
+							if (c >= BETA) { 
 								if (ll2C0.containsKey(ll)) {
 									ll2C0.put(ll, ((Integer) ll2C0.get(ll)) + 1);
 								} else {
@@ -725,14 +720,14 @@ public class TFIDF_Main {
 							nC0Xl++;
 							nC1Xl++;
 							c = countQoS * 1.0 / n;
-							if (c >= BETA) { /* 为了把功能分离开吧 */// 达不到QoS值标准的数目占目前总数的比值大于等于我们约定的临界值β，那么显然不落在c1中。
+							if (c >= BETA) { // 达不到QoS值标准的数目占目前总数的比值大于等于我们约定的临界值β，那么显然不落在c1中。
 								nC1Xl--;
 							} else {
 								nC0Xl--;
 							}
 						}
 						c = countQoS * 1.0 / n;
-						if (c >= BETA) { /* 为了把功能分离开吧 */
+						if (c >= BETA) { 
 							if (ll2C0.containsKey(ll)) {
 								ll2C0.put(ll, ((Integer) ll2C0.get(ll)) + 1);
 							} else {
@@ -756,7 +751,6 @@ public class TFIDF_Main {
 	}
 
 	public static double computePro_C0(double[][] tpData, int x, int n) {
-		// 根据C0计算似然概率，为后面计算后验概率做准备
 		if (n > shortMonlength) {
 			if (YorN.get(n - shortMonlength - 1) == 1) {
 				nC0--;
@@ -770,7 +764,6 @@ public class TFIDF_Main {
 	}
 
 	public static double computePro_C1(double[][] tpData, int x, int n) {
-		// 根据C1计算似然概率，为后面计算后验概率做准备
 		if (n > shortMonlength) {
 			if (YorN.get(n - shortMonlength - 1) == 0) {
 				nC1--;
